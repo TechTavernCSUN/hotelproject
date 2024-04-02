@@ -1,41 +1,5 @@
 import java.util.Scanner;
 
-// public class HotelReservationUI {
-//     private ReservationController reservationController;
-//     private ClientController clientController;
-//     //private ManagerController managerController;
-//     private AuthenticationManager authenticationManager;
-//     private Scanner scanner;
-
-//     public HotelReservationUI() {
-//         this.reservationController = new ReservationController(new DatabaseManager(), new EmailService());
-//         this.clientController = new ClientController(new DatabaseManager());
-//         //this.managerController = new ManagerController(new DatabaseManager());
-//         this.authenticationManager = new AuthenticationManager();
-//         this.scanner = new Scanner(System.in);
-//     }
-
-//     public void start() {
-//         // Implement logic to display menu options and handle user input
-//         // Include options for client registration, hotel management, reservation operations, etc.
-//     }
-
-//     private void displayMenu() {
-//         // Implement logic to display menu options
-//     }
-
-//     private void handleMenuSelection(int choice) {
-//         // Implement logic to handle user menu selection
-//     }
-
-//     public static void main(String[] args) {
-//         HotelReservationUI hotelUI = new HotelReservationUI();
-//         hotelUI.start();
-//     }
-// }
-
-import java.util.Scanner;
-
 public class HotelReservationUI {
     private ReservationController reservationController;
     private ClientController clientController;
