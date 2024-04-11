@@ -23,8 +23,9 @@ public class Main {
         try (Connection roomsConnection = DriverManager.getConnection(roomsDbUrl);
              Connection reservationsConnection = DriverManager.getConnection(reservationsDbUrl)) {
 
-            int reservationId = 1; // Example reservation ID to cancel
-            boolean success = ReservationManager.cancelReservation(roomsConnection, reservationsConnection, reservationId);
+            int roomNumber = 1;
+            String email = "alice.johnson@example.com";
+            boolean success = ReservationManager.cancelReservation(roomsConnection, reservationsConnection, roomNumber, email);
             if (success) {
                 System.out.println("Reservation cancelled successfully.");
             } else {

@@ -42,34 +42,34 @@ public class ReservationManager {
         }
     }
 
-    public static boolean cancelReservation(Connection roomsConnection, Connection reservationsConnection, int reservationId) {
+    public static boolean cancelReservation(Connection roomsConnection, Connection reservationsConnection, int roomNumber, String email) {
         try {
-            // Disable auto-commit for transactional integrity
+            // Start transaction
             roomsConnection.setAutoCommit(false);
             reservationsConnection.setAutoCommit(false);
 
-            // First, get the room number from the reservation to be canceled
-            int roomNumber = getRoomNumberForReservation(reservationsConnection, reservationId);
-            if (roomNumber == -1) {
-                System.out.println("No reservation found with ID: " + reservationId);
+            // Check if a reservation with the given room number and email exists
+            int reservationId = findReservationIdByEmailAndRoom(reservationsConnection, roomNumber, email);
+            if (reservationId == -1) {
+                System.out.println("No reservation found for the given room number and email.");
                 return false;
             }
 
             // Delete the reservation
             if (!deleteReservation(reservationsConnection, reservationId)) {
-                reservationsConnection.rollback();  // Rollback reservation changes
+                reservationsConnection.rollback();  // Rollback if deletion fails
                 System.out.println("Failed to delete reservation.");
                 return false;
             }
 
-            // Update the room status
+            // Update the room status to not reserved
             if (!updateRoomStatus(roomsConnection, roomNumber, false)) {
-                roomsConnection.rollback();  // Rollback room status changes
+                roomsConnection.rollback();  // Rollback if room update fails
                 System.out.println("Failed to update room status.");
                 return false;
             }
 
-            // Commit transactions if all operations are successful
+            // Commit the transaction
             roomsConnection.commit();
             reservationsConnection.commit();
             return true;
@@ -90,6 +90,20 @@ public class ReservationManager {
                 System.err.println("Error resetting auto-commit: " + se.getMessage());
             }
         }
+    }
+
+    private static int findReservationIdByEmailAndRoom(Connection connection, int roomNumber, String email) throws SQLException {
+        String sql = "SELECT RESERVATION_ID FROM RESERVATIONS WHERE ROOM_NUMBER = ? AND EMAIL = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, roomNumber);
+            pstmt.setString(2, email);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("RESERVATION_ID");
+                }
+            }
+        }
+        return -1; // Return -1 if no matching reservation is found
     }
 
     private static boolean updateRoomStatus(Connection connection, int roomNumber, boolean reserved) throws SQLException {
