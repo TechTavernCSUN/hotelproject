@@ -4,8 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10" prefWidth="300" prefHeight="200" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.demoproj.ConfirmationController">
+<VBox alignment="CENTER" prefHeight="200" prefWidth="469.0" spacing="10" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.demoproj.ConfirmationController">
     <Label text="Reservation Confirmed" />
     <Label fx:id="confirmationMessageLabel" />
-    <Button text="Return to Main Menu" onAction="#returnToMainMenu" />
+    <Button onAction="#returnToMainMenu" text="Return to Main Menu" />
 </VBox>

@@ -9,7 +9,7 @@ public class ConfirmationController {
 
     public void setReservationDetails(Room room, int numberOfDays, int cost) {
         confirmationMessageLabel.setText("Your reservation for Room " + room.getRoomId() +
-                " for " + numberOfDays + " days has been confirmed. Total cost: $" + cost + ".");
+                " for " + numberOfDays + " day(s) has been confirmed. Total cost: $" + cost + ".");
     }
 
     @FXML
