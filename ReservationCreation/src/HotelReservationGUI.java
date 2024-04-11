@@ -111,12 +111,12 @@ public class HotelReservationGUI extends Application {
                     ObservableList<String> reservations = FXCollections.observableArrayList();
                     while (rsReservations.next()) {
                         reservations.add("Reservation ID: " + rsReservations.getInt("RESERVATION_ID") +
+                                ", Room #: " + rsReservations.getInt("ROOM_NUMBER") +
                                 ", Email: " + rsReservations.getString("EMAIL") +
                                 ", Name: " + rsReservations.getString("NAME") +
                                 ", Payment: " + rsReservations.getString("PAYMENT") +
                                 ", Check-In: " + rsReservations.getString("CHECK_IN") +
-                                ", Check-Out: " + rsReservations.getString("CHECK_OUT") +
-                                ", Room #: " + rsReservations.getInt("ROOM_NUMBER"));
+                                ", Check-Out: " + rsReservations.getString("CHECK_OUT"));
                     }
                     reservationsList.setItems(reservations);
                 }
