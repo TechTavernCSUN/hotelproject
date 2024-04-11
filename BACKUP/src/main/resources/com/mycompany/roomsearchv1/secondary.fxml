@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.roomsearchv1.SecondaryController">
+    <top>
+        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #333333;">
+            <Label text="Book a Room" textFill="WHITE">
+            <font>
+               <Font size="30.0" />
+            </font></Label>
+        </HBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="10.0">
+            <Label fx:id="roomNumberLabel" />
+            <Label text="Name:" />
+            <TextField fx:id="nameField" />
+            <Label text="Email:" />
+            <TextField fx:id="emailField" />
+            <Label text="Please enter number of days:" />
+            <Spinner fx:id="daysSpinner" />
+            <Label fx:id="costLabel" />
+            <Button onAction="#confirmReservation" text="Confirm Reservation" />
+        </VBox>
+    </center>
+</BorderPane>
