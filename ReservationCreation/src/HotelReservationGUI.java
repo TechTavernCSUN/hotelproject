@@ -96,7 +96,7 @@ public class HotelReservationGUI extends Application {
                     while (rsHotelRooms.next()) {
                         hotelRooms.add("Room " + rsHotelRooms.getInt("ROOM_NUMBER") +
                                 ", " + (rsHotelRooms.getBoolean("RESERVED") ? "Reserved" : "Available") +
-                                ", $" + rsHotelRooms.getDouble("COST") +
+                                ", $" + rsHotelRooms.getDouble("PRICE") +
                                 ", " + rsHotelRooms.getString("ROOM_TYPE"));
                     }
                     hotelRoomsList.setItems(hotelRooms);
@@ -116,7 +116,9 @@ public class HotelReservationGUI extends Application {
                                 ", Name: " + rsReservations.getString("NAME") +
                                 ", Payment: " + rsReservations.getString("PAYMENT") +
                                 ", Check-In: " + rsReservations.getString("CHECK_IN") +
-                                ", Check-Out: " + rsReservations.getString("CHECK_OUT"));
+                                ", Check-Out: " + rsReservations.getString("CHECK_OUT") +
+                                ", Price: " + rsReservations.getString("PRICE") +
+                                ", Total: " + rsReservations.getString("TOTAL"));
                     }
                     reservationsList.setItems(reservations);
                 }

@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.sql.ResultSet;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -68,7 +69,7 @@ public class DatabaseCreation {
             String sqlCreateHotelRooms = "CREATE TABLE HOTEL_ROOMS (" +
                     "ROOM_NUMBER INT PRIMARY KEY NOT NULL, " +
                     "ROOM_TYPE TEXT NOT NULL, " +
-                    "COST DOUBLE NOT NULL, " +
+                    "PRICE DOUBLE NOT NULL, " +
                     "RESERVED BOOLEAN NOT NULL DEFAULT FALSE)";
             roomsStmt.executeUpdate(sqlCreateHotelRooms);
 
@@ -86,7 +87,7 @@ public class DatabaseCreation {
                     roomType = "Suite";
                     cost = 200.00;
                 }
-                roomsStmt.executeUpdate("INSERT INTO HOTEL_ROOMS (ROOM_NUMBER, ROOM_TYPE, COST, RESERVED) " +
+                roomsStmt.executeUpdate("INSERT INTO HOTEL_ROOMS (ROOM_NUMBER, ROOM_TYPE, PRICE, RESERVED) " +
                         "VALUES (" + i + ", '" + roomType + "', " + cost + ", FALSE);");
             }
 
@@ -98,13 +99,17 @@ public class DatabaseCreation {
                     "ROOM_NUMBER INT NOT NULL, " +
                     "PAYMENT TEXT NOT NULL, " +
                     "CHECK_IN DATE NOT NULL, " +
-                    "CHECK_OUT DATE NOT NULL)";
+                    "CHECK_OUT DATE NOT NULL, " +
+                    "PRICE DOUBLE NOT NULL, " +
+                    "TOTAL DOUBLE NOT NULL)";
+
             reservationsStmt.executeUpdate(sqlCreateReservations);
 
             // Define check-in date
             Calendar cal = Calendar.getInstance();
             String checkInDate = dateFormat.format(cal.getTime());
-            cal.add(Calendar.DATE, 4);  // Add 4 days for the check-out date
+            int stay_time = 4;
+            cal.add(Calendar.DATE, stay_time);  // Add 4 days for the check-out date
             String checkOutDate = dateFormat.format(cal.getTime());
 
             // Assign guests to rooms and update reservation status
@@ -124,13 +129,23 @@ public class DatabaseCreation {
                     break;  // No more rooms to assign
                 }
 
+
                 String email = SAMPLE_GUESTS[i][1];
                 String name = SAMPLE_GUESTS[i][0];
 
+                ResultSet priceResult = roomsStmt.executeQuery("SELECT PRICE FROM HOTEL_ROOMS WHERE ROOM_NUMBER = " + roomNumber);
+                double pricePerDay = 0;
+                if (priceResult.next()) {
+                    pricePerDay = priceResult.getDouble("PRICE");
+                }
+
+                double totalPrice = pricePerDay * stay_time; // Calculate total price based on stay duration
+
                 // Insert into reservations
-                reservationsStmt.executeUpdate("INSERT INTO RESERVATIONS (RESERVATION_ID, EMAIL, NAME, ROOM_NUMBER, PAYMENT, CHECK_IN, CHECK_OUT) " +
+                reservationsStmt.executeUpdate("INSERT INTO RESERVATIONS (RESERVATION_ID, EMAIL, NAME, ROOM_NUMBER, PAYMENT, CHECK_IN, CHECK_OUT, PRICE, TOTAL) " +
                         "VALUES (" + (i + 1) + ", '" + email + "', '" + name + "', " + roomNumber + ", '" + paymentType + "', '" +
-                        checkInDate + "', '" + checkOutDate + "');");
+                        checkInDate + "', '" + checkOutDate + "', " + pricePerDay + ", " + totalPrice + ");");
+
 
                 // Update rooms to reserved
                 roomsStmt.executeUpdate("UPDATE HOTEL_ROOMS SET RESERVED = TRUE WHERE ROOM_NUMBER = " + roomNumber);
