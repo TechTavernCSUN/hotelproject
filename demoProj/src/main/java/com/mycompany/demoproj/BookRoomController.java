@@ -103,6 +103,11 @@ public class BookRoomController {
             label.setFont(font);
         }
     }
+    
+    @FXML
+    private void handleBack() throws IOException {
+        App.setRoot("primary");
+    }
 
     // Filter rooms based on availability
     private void filterRooms() {

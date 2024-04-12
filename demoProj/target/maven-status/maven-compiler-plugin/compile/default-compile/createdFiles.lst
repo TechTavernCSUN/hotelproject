@@ -7,3 +7,4 @@ com\mycompany\demoproj\ReserveRoomController.class
 com\mycompany\demoproj\BookRoomController.class
 module-info.class
 com\mycompany\demoproj\CancelReservationController.class
+com\mycompany\demoproj\ConfirmationController.class

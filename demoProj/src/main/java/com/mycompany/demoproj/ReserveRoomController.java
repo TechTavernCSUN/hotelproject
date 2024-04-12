@@ -7,6 +7,11 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import java.io.IOException;
 
 public class ReserveRoomController {
     @FXML
@@ -75,14 +80,28 @@ public class ReserveRoomController {
         // Update the table view in the primary controller
         primaryController.updateTableView();
 
-        // Implement reservation confirmation logic here
-        System.out.println("Reservation confirmed for room number: " + selectedRoom.getRoomId() +
-                ", Name: " + nameField.getText() +
-                ", Email: " + emailField.getText() +
-                ", for " + numberOfDays + " days. Total Cost: $" + cost);
+        // Close the current pop-up
+        Stage currentStage = (Stage) roomNumberLabel.getScene().getWindow();
+        currentStage.close();
 
-        // Close the secondary stage
-        ((Stage) roomNumberLabel.getScene().getWindow()).close();
+        // Open the confirmation pop-up
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Confirmation.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+            ConfirmationController controller = loader.getController();
+            controller.setReservationDetails(selectedRoom, numberOfDays, cost); // Pass reservation details to the confirmation controller
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
+//System.out.println("Reservation confirmed for room number: " + selectedRoom.getRoomId() +
+//                ", Name: " + nameField.getText() +
+//                ", Email: " + emailField.getText() +
+//                ", for " + numberOfDays + " days. Total Cost: $" + cost);
