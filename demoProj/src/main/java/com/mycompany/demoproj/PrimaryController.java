@@ -33,12 +33,12 @@ public class PrimaryController {
     
     @FXML
     private void handleYourReservations() throws IOException {
-        App.setRoot("primary");
+        App.setRoot("ClientReservation");
     }
     
     @FXML
     private void handleGenerateReport() throws IOException {
-        App.setRoot("primary");
+        App.setRoot("Report");
     }
     
     @FXML

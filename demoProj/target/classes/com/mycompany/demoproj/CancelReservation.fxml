@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.demoproj.CancelReservationController">
     <top>
@@ -17,12 +18,13 @@
             <!-- Black bar with TechTavern logo -->
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="800.0" style="-fx-background-color: #000000;">
                 <!-- Back button -->
-                <Button mnemonicParsing="false" text="Back" onAction="#handleBack" />
+                <Button mnemonicParsing="false" onAction="#handleBack" text="Back" />
                 <Region HBox.hgrow="ALWAYS" />
                 <Label style="-fx-font-size: 24pt; -fx-font-weight: bold;" text="TechTavern" textFill="WHITE">
-               <HBox.margin>
-                  <Insets left="140.0" />
-               </HBox.margin></Label>
+                    <HBox.margin>
+                        <Insets left="140.0" />
+                    </HBox.margin>
+                </Label>
                 <Region HBox.hgrow="ALWAYS" />
                 <!-- Spacer to center the logo -->
                 <Region HBox.hgrow="ALWAYS" />
@@ -36,28 +38,35 @@
     </top>
     <center>
         <VBox alignment="CENTER" spacing="20">
+            <Label alignment="CENTER" prefHeight="66.0" prefWidth="226.0" text="Cancel Reservation" textAlignment="CENTER">
+            <font>
+               <Font name="System Bold" size="25.0" />
+            </font></Label>
             <HBox alignment="CENTER" spacing="10">
                 <Label text="Name" />
                 <TextField fx:id="nameField" prefWidth="150">
-               <HBox.margin>
-                  <Insets right="3.0" />
-               </HBox.margin></TextField>
+                    <HBox.margin>
+                        <Insets right="3.0" />
+                    </HBox.margin>
+                </TextField>
             </HBox>
             <HBox alignment="CENTER" spacing="10">
                 <Label text="Room Number" />
                 <TextField fx:id="roomNumberField" prefWidth="150">
-               <HBox.margin>
-                  <Insets right="50.0" />
-               </HBox.margin></TextField>
+                    <HBox.margin>
+                        <Insets right="50.0" />
+                    </HBox.margin>
+                </TextField>
             </HBox>
             <HBox alignment="CENTER" spacing="10">
                 <Label text="Email" />
                 <TextField fx:id="emailField" prefWidth="150" />
             </HBox>
             <Button onAction="#handleCancel" text="Confirm">
-            <VBox.margin>
-               <Insets left="25.0" />
-            </VBox.margin></Button>
+                <VBox.margin>
+                    <Insets left="25.0" />
+                </VBox.margin>
+            </Button>
         </VBox>
     </center>
     <bottom>

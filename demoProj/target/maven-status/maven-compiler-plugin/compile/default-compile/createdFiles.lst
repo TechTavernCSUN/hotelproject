@@ -8,3 +8,5 @@ com\mycompany\demoproj\BookRoomController.class
 module-info.class
 com\mycompany\demoproj\CancelReservationController.class
 com\mycompany\demoproj\ConfirmationController.class
+com\mycompany\demoproj\ReportController.class
+com\mycompany\demoproj\ClientReservationController.class
