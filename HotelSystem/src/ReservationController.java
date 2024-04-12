@@ -3,17 +3,17 @@ import java.util.Date;
 
 public class ReservationController {
     private DatabaseManager databaseManager;
-    private EmailService emailService; // You'll need to implement this class for sending emails
+    //private EmailService emailService; // You'll need to implement this class for sending emails
 
     public ReservationController(DatabaseManager databaseManager, EmailService emailService) {
         this.databaseManager = databaseManager;
-        this.emailService = emailService;
+        //this.emailService = emailService;
     }
 
-    public List<Room> searchAvailableRooms(Date checkInDate, Date checkOutDate, RoomType roomType) {
-        // Implement logic to search for available rooms based on the provided criteria
-        return databaseManager.getAvailableRooms(checkInDate, checkOutDate, roomType);
-    }
+    // public List<Room> searchAvailableRooms(Date checkInDate, Date checkOutDate, RoomType roomType) {
+    //     // Implement logic to search for available rooms based on the provided criteria
+    //     return databaseManager.getAvailableRooms(checkInDate, checkOutDate, roomType);
+    // }
 
     public Reservation makeReservation(Client client, Room room, Date checkInDate, Date checkOutDate) {
         // Implement logic to make a reservation
@@ -21,7 +21,7 @@ public class ReservationController {
         databaseManager.addReservation(reservation);
 
         // Send confirmation email to the client
-        emailService.sendConfirmationEmail(client.getEmail(), reservation);
+        //emailService.sendConfirmationEmail(client.getEmail(), reservation);
 
         return reservation;
     }
@@ -31,11 +31,11 @@ public class ReservationController {
         databaseManager.deleteReservation(reservation);
 
         // Send cancellation confirmation email to the client
-        emailService.sendCancellationEmail(reservation.getClient().getEmail(), reservation);
+        //emailService.sendCancellationEmail(reservation.getClient().getEmail(), reservation);
     }
 
-    public List<Reservation> generateReport() {
-        // Implement logic to generate a report of current reservations
-        return databaseManager.getAllReservations();
-    }
+    // public List<Reservation> generateReport() {
+    //     // Implement logic to generate a report of current reservations
+    //     return databaseManager.getAllReservations();
+    // }
 }
