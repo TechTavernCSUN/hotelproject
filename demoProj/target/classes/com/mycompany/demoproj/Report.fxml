@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.demoproj.ReportController">
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #333333;">
+            <!-- Back button -->
+            <Button mnemonicParsing="false" onAction="#handleBack" text="Back" textFill="WHITE" />
+            <Label text="Hotel Manager Info System" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="20.0" />
+                </font>
+            <HBox.margin>
+               <Insets left="225.0" />
+            </HBox.margin>
+            </Label>
+        </HBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" prefHeight="300.0" prefWidth="600.0" spacing="10.0">
+            <TextField fx:id="searchField" promptText="Search Rooms" />
+            <TableView fx:id="roomTable">
+                <columns>
+                    <TableColumn fx:id="reserveIdColumn" prefWidth="88.0" text="Reservation ID" />
+                    <TableColumn fx:id="roomidColumn" prefWidth="88.0" text="Room Number" />
+                    <TableColumn fx:id="emailColumn" prefWidth="88.0" text="Email" />
+                    <TableColumn fx:id="clientColumn" prefWidth="88.0" text="Client" />
+                    <TableColumn fx:id="availabilityColumn" text="Check-in" />
+                    <TableColumn fx:id="checkOutColumn" text="Check-out" />
+                    <TableColumn fx:id="priceColumn" text="Price" />
+                    <TableColumn fx:id="totalColumn" text="Total" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #333333;">
+
+        </HBox>
+    </bottom>
+</BorderPane>
