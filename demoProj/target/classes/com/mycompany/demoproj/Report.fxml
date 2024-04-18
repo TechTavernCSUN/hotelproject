@@ -29,7 +29,7 @@
     <center>
         <VBox alignment="CENTER" prefHeight="300.0" prefWidth="600.0" spacing="10.0">
             <TextField fx:id="searchField" promptText="Search Rooms" />
-            <TableView fx:id="roomTable">
+            <TableView fx:id="tableView">
                 <columns>
                     <TableColumn fx:id="columnReservationId" prefWidth="88.0" text="Reservation ID" />
                     <TableColumn fx:id="columnEmail" prefWidth="88.0" text="Email" />

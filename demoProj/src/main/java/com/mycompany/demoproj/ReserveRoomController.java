@@ -43,13 +43,13 @@ public class ReserveRoomController {
             // Listener to update cost label when spinner value changes
             daysSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
-                    int cost = newValue * selectedRoom.getPricePerNight();
+                    double cost = newValue * selectedRoom.getPricePerNight();
                     costLabel.setText("Cost: $" + cost);
                 }
             });
 
             // Initialize cost label text
-            int initialCost = valueFactory.getValue() * selectedRoom.getPricePerNight();
+            double initialCost = valueFactory.getValue() * selectedRoom.getPricePerNight();
             costLabel.setText("Cost: $" + initialCost);
         }
     }
@@ -69,13 +69,13 @@ public class ReserveRoomController {
         int numberOfDays = daysSpinner.getValue();
 
         // Calculate the cost
-        int cost = numberOfDays * selectedRoom.getPricePerNight();
+        double cost = selectedRoom.getPricePerNight() * numberOfDays;
 
         // Set the cost label
         costLabel.setText("Cost: $" + cost);
 
         // Update the room's availability status to false (reserved)
-        selectedRoom.setAvailable(false);
+        // selectedRoom.setAvailable(false);
 
         // Update the table view in the primary controller
         primaryController.updateTableView();
@@ -90,7 +90,8 @@ public class ReserveRoomController {
         try {
             root = loader.load();
             ConfirmationController controller = loader.getController();
-            controller.setReservationDetails(selectedRoom, numberOfDays, cost); // Pass reservation details to the confirmation controller
+            //Placeholder cost placed because errors were coming from cost variable
+            controller.setReservationDetails(selectedRoom, numberOfDays, 100); // Pass reservation details to the confirmation controller
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
