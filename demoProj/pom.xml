@@ -30,6 +30,11 @@
             <artifactId>slf4j-simple.id</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>group.id</groupId>
+            <artifactId>slf4j-api.id</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

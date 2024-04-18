@@ -3,6 +3,11 @@ package com.mycompany.demoproj;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Modality;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
 
 public class PrimaryController {
 
@@ -43,7 +48,16 @@ public class PrimaryController {
     
     @FXML
     private void handleGenerateRevenue() throws IOException {
-        App.setRoot("primary");
+        // Load the FXML file for the revenue page
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Revenue.fxml"));
+        Parent root = loader.load();
+        
+        // Create a new stage for the revenue page
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Generate Revenue");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
     
     // Add setters for the buttons
