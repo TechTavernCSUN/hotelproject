@@ -76,19 +76,19 @@ public class DatabaseCreation {
             // Insert room details
             for (int i = 1; i <= 50; i++) {
                 String roomType;
-                double cost;
+                double price;
                 if (i <= 20) {  // Standard rooms
                     roomType = "Standard";
-                    cost = 100.00;
+                    price = 100.00;
                 } else if (i <= 40) {  // Double rooms
                     roomType = "Double";
-                    cost = 150.00;
+                    price = 150.00;
                 } else {  // Suites
                     roomType = "Suite";
-                    cost = 200.00;
+                    price = 200.00;
                 }
                 roomsStmt.executeUpdate("INSERT INTO HOTEL_ROOMS (ROOM_NUMBER, ROOM_TYPE, PRICE, RESERVED) " +
-                        "VALUES (" + i + ", '" + roomType + "', " + cost + ", FALSE);");
+                        "VALUES (" + i + ", '" + roomType + "', " + price + ", FALSE);");
             }
 
             // Create RESERVATIONS table
