@@ -1,5 +1,8 @@
 package com.mycompany.demoproj;
 
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,17 +10,79 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 
+
 public class ReservationManager {
 
-    public static boolean reserveRoom(Connection roomsConnection, Connection reservationsConnection, int roomNumber, String[] guestDetails) {
+    public static boolean reserveRoom(Connection roomsConnection, Connection reservationsConnection, int roomNumber, String[] guestDetails, String paymentType, int daysStayed) {
         try {
+            if (!isRoomAvailable(roomsConnection, roomNumber)) {
+                System.out.println("Room " + roomNumber + " is not available for reservation as it is already reserved.");
+                return false;
+            }
+
+            double price = getRoomPrice(roomsConnection, roomNumber);  // Ensure this method fetches the price correctly
+
             int reservationId = getLatestReservationId(reservationsConnection) + 1;
-            insertReservation(reservationsConnection, reservationId, guestDetails, roomNumber);
+            insertReservation(reservationsConnection, reservationId, guestDetails, roomNumber, price, paymentType, daysStayed);  // Pass paymentType and daysStayed here
+
             updateRoomStatus(roomsConnection, roomNumber, true);
+
             return true;
         } catch (SQLException e) {
             System.err.println("SQL Error: " + e.getMessage());
             return false;
+        }
+    }
+
+
+    private static boolean isRoomAvailable(Connection connection, int roomNumber) throws SQLException {
+        String sql = "SELECT RESERVED FROM HOTEL_ROOMS WHERE ROOM_NUMBER = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, roomNumber);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return !rs.getBoolean("RESERVED");  // True if room is not reserved
+            }
+            return false;  // Default return if room does not exist
+        }
+    }
+
+    private static double getRoomPrice(Connection connection, int roomNumber) throws SQLException {
+        String sql = "SELECT PRICE FROM HOTEL_ROOMS WHERE ROOM_NUMBER = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, roomNumber);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble("PRICE");
+            } else {
+                throw new SQLException("No room with the specified number: " + roomNumber);
+            }
+        }
+    }
+
+
+    private static void insertReservation(Connection connection, int reservationId, String[] guestDetails, int roomNumber, double price, String paymentType, int daysStayed) throws SQLException {
+        double total = price * daysStayed;  // Calculate total based on the stay duration
+
+        // Using LocalDate for dynamic date handling
+        LocalDate checkIn = LocalDate.now();
+        LocalDate checkOut = checkIn.plusDays(daysStayed);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        String sql = "INSERT INTO RESERVATIONS (RESERVATION_ID, EMAIL, NAME, PAYMENT, CHECK_IN, CHECK_OUT, ROOM_NUMBER, PRICE, TOTAL) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, reservationId);
+            pstmt.setString(2, guestDetails[1]); // Email
+            pstmt.setString(3, guestDetails[0]); // Name
+            pstmt.setString(4, paymentType);
+            pstmt.setString(5, checkIn.format(formatter)); // Formatted check-in date
+            pstmt.setString(6, checkOut.format(formatter)); // Formatted check-out date
+            pstmt.setInt(7, roomNumber);
+            pstmt.setDouble(8, price);
+            pstmt.setDouble(9, total);  // Set the calculated total
+            pstmt.executeUpdate();
         }
     }
 
@@ -28,19 +93,6 @@ public class ReservationManager {
                 return rs.getInt("max_id");
             }
             return 0; // Default to 0 if no reservations are found
-        }
-    }
-
-    private static void insertReservation(Connection connection, int reservationId, String[] guestDetails, int roomNumber) throws SQLException {
-        String sql = "INSERT INTO RESERVATIONS (RESERVATION_ID, EMAIL, NAME, PAYMENT, CHECK_IN, CHECK_OUT, ROOM_NUMBER) " +
-                "VALUES (?, ?, ?, ?, '2024-01-01', '2024-01-05', ?)";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, reservationId);
-            pstmt.setString(2, guestDetails[1]); // Email
-            pstmt.setString(3, guestDetails[0]); // Name
-            pstmt.setString(4, new Random().nextBoolean() ? "Credit/Debit" : "Cash");
-            pstmt.setInt(5, roomNumber);
-            pstmt.executeUpdate();
         }
     }
 
@@ -125,18 +177,5 @@ public class ReservationManager {
             int affectedRows = pstmt.executeUpdate();
             return affectedRows > 0;
         }
-    }
-
-    private static int getRoomNumberForReservation(Connection connection, int reservationId) throws SQLException {
-        String sql = "SELECT ROOM_NUMBER FROM RESERVATIONS WHERE RESERVATION_ID = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, reservationId);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("ROOM_NUMBER");
-                }
-            }
-        }
-        return -1; // Return -1 if no reservation is found
     }
 }
