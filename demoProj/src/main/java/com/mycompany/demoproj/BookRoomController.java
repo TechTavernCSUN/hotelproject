@@ -45,11 +45,6 @@ public class BookRoomController {
 
     public void initialize() {
         // Initialize room data
-//        roomTable.getItems().addAll(
-//                new Room(101, "Single", true, 100),
-//                new Room(102, "Double", true, 200),
-//                new Room(103, "Suite", true, 500)
-//        );
 
         // Initialize columns
         roomIdColumn.setCellValueFactory(cellData -> cellData.getValue().roomIdProperty());
