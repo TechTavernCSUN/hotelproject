@@ -7,13 +7,13 @@ public class Room {
     private final IntegerProperty roomId;
     private final StringProperty roomType;
     private final BooleanProperty available;
-    private final IntegerProperty pricePerNight;
+    private final DoubleProperty pricePerNight;
 
-    public Room(int roomId, String roomType, boolean available, int pricePerNight) {
+    public Room(int roomId, String roomType, double pricePerNight, boolean available) {
         this.roomId = new SimpleIntegerProperty(roomId);
         this.roomType = new SimpleStringProperty(roomType);
+        this.pricePerNight = new SimpleDoubleProperty(pricePerNight);
         this.available = new SimpleBooleanProperty(available);
-        this.pricePerNight = new SimpleIntegerProperty(pricePerNight);
     }
 
     public IntegerProperty roomIdProperty() {
@@ -44,11 +44,11 @@ public class Room {
         this.available.set(available);
     }
 
-    public IntegerProperty pricePerNightProperty() {
+    public DoubleProperty pricePerNightProperty() {
         return pricePerNight;
     }
 
-    public int getPricePerNight() {
+    public double getPricePerNight() {
         return pricePerNight.get();
     }
     

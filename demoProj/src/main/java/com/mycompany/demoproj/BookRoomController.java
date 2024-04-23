@@ -13,7 +13,13 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javafx.beans.property.BooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class BookRoomController {
     @FXML
@@ -39,11 +45,11 @@ public class BookRoomController {
 
     public void initialize() {
         // Initialize room data
-        roomTable.getItems().addAll(
-                new Room(101, "Single", true, 100),
-                new Room(102, "Double", true, 200),
-                new Room(103, "Suite", true, 500)
-        );
+//        roomTable.getItems().addAll(
+//                new Room(101, "Single", true, 100),
+//                new Room(102, "Double", true, 200),
+//                new Room(103, "Suite", true, 500)
+//        );
 
         // Initialize columns
         roomIdColumn.setCellValueFactory(cellData -> cellData.getValue().roomIdProperty());
@@ -56,6 +62,8 @@ public class BookRoomController {
                     .otherwise("Reserved");
         });
 
+        loadRoomData();    
+        
         // Initialize reserve column
         reserveColumn.setCellFactory(param -> new TableCell<>() {
             private final Button reserveButton = new Button("Reserve");
@@ -101,6 +109,29 @@ public class BookRoomController {
         if (label != null) {
             Font font = Font.font("System Bold", 20);
             label.setFont(font);
+        }
+    }
+    
+    private void loadRoomData() {
+        ObservableList<Room> rooms = FXCollections.observableArrayList();
+        String url = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\hotel_rooms.db";
+        String query = "SELECT * FROM HOTEL_ROOMS";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                rooms.add(new Room(
+                    rs.getInt("ROOM_NUMBER"),
+                    rs.getString("ROOM_TYPE"),
+                    rs.getDouble("PRICE"),
+                    !rs.getBoolean("RESERVED")
+                ));
+            }
+            roomTable.setItems(rooms);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
