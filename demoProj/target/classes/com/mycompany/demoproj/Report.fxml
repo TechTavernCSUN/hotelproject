@@ -29,16 +29,17 @@
     <center>
         <VBox alignment="CENTER" prefHeight="300.0" prefWidth="600.0" spacing="10.0">
             <TextField fx:id="searchField" promptText="Search Rooms" />
-            <TableView fx:id="roomTable">
+            <TableView fx:id="tableView">
                 <columns>
-                    <TableColumn fx:id="reserveIdColumn" prefWidth="88.0" text="Reservation ID" />
-                    <TableColumn fx:id="roomidColumn" prefWidth="88.0" text="Room Number" />
-                    <TableColumn fx:id="emailColumn" prefWidth="88.0" text="Email" />
-                    <TableColumn fx:id="clientColumn" prefWidth="88.0" text="Client" />
-                    <TableColumn fx:id="availabilityColumn" text="Check-in" />
-                    <TableColumn fx:id="checkOutColumn" text="Check-out" />
-                    <TableColumn fx:id="priceColumn" text="Price" />
-                    <TableColumn fx:id="totalColumn" text="Total" />
+                    <TableColumn fx:id="columnReservationId" prefWidth="88.0" text="Reservation ID" />
+                    <TableColumn fx:id="columnEmail" prefWidth="88.0" text="Email" />
+                    <TableColumn fx:id="columnName" prefWidth="88.0" text="Client" />
+                    <TableColumn fx:id="columnRoomNumber" prefWidth="88.0" text="Room Number" />
+                    <TableColumn fx:id="columnCheckIn" text="Check-in" />
+                    <TableColumn fx:id="columnCheckOut" text="Check-out" />
+                    <TableColumn fx:id="columnPayment" text="Payment" />
+                    <TableColumn fx:id="columnPrice" text="Price" />
+                    <TableColumn fx:id="columnTotal" text="Total" />
                 </columns>
             </TableView>
         </VBox>

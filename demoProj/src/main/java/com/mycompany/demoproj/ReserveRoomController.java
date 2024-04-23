@@ -1,4 +1,7 @@
-
+//Class Name: ReserveRoomController
+//Date of Code: 4/23/24
+//Name of Coder: Christopher Lagos
+//Description: Handles the reservation UI and updating of the reservation status.
 package com.mycompany.demoproj;
 
 import javafx.fxml.FXML;
@@ -36,20 +39,20 @@ public class ReserveRoomController {
         if (selectedRoom != null) {
             roomNumberLabel.setText("Room Number: " + selectedRoom.getRoomId());
 
-            // Set spinner value factory to allow only positive integers
+            // Set spinner value to allow only positive integers
             SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1);
             daysSpinner.setValueFactory(valueFactory);
 
             // Listener to update cost label when spinner value changes
             daysSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
-                    int cost = newValue * selectedRoom.getPricePerNight();
+                    double cost = newValue * selectedRoom.getPricePerNight();
                     costLabel.setText("Cost: $" + cost);
                 }
             });
 
             // Initialize cost label text
-            int initialCost = valueFactory.getValue() * selectedRoom.getPricePerNight();
+            double initialCost = valueFactory.getValue() * selectedRoom.getPricePerNight();
             costLabel.setText("Cost: $" + initialCost);
         }
     }
@@ -64,23 +67,22 @@ public class ReserveRoomController {
     }
 
     @FXML
+    //Shows confirmation UI
     private void confirmReservation() {
         // Get the selected number of days from the spinner
         int numberOfDays = daysSpinner.getValue();
 
         // Calculate the cost
-        int cost = numberOfDays * selectedRoom.getPricePerNight();
+        double cost = selectedRoom.getPricePerNight() * numberOfDays;
 
         // Set the cost label
         costLabel.setText("Cost: $" + cost);
 
         // Update the room's availability status to false (reserved)
-        selectedRoom.setAvailable(false);
-
         // Update the table view in the primary controller
         primaryController.updateTableView();
 
-        // Close the current pop-up
+        // Close the current pop-up / return to Booking table
         Stage currentStage = (Stage) roomNumberLabel.getScene().getWindow();
         currentStage.close();
 
@@ -90,7 +92,8 @@ public class ReserveRoomController {
         try {
             root = loader.load();
             ConfirmationController controller = loader.getController();
-            controller.setReservationDetails(selectedRoom, numberOfDays, cost); // Pass reservation details to the confirmation controller
+            //Placeholder cost placed because errors were coming from cost variable
+            controller.setReservationDetails(selectedRoom, numberOfDays, 100); // Pass reservation details to the confirmation controller
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
@@ -101,7 +104,3 @@ public class ReserveRoomController {
     }
 }
 
-//System.out.println("Reservation confirmed for room number: " + selectedRoom.getRoomId() +
-//                ", Name: " + nameField.getText() +
-//                ", Email: " + emailField.getText() +
-//                ", for " + numberOfDays + " days. Total Cost: $" + cost);
