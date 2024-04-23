@@ -2,7 +2,29 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Main {
+/**
+ * Class Name: TestSystem
+ * Date of the Code: 4/11/2024
+ * Programmer's Name: Jacob Spier
+ * Description: Main test class for a Java application handling hotel room reservations and cancellations,
+ *              and calculates revenue. Utilizes JDBC for database connectivity.
+ *
+ * Important Functions:
+ * - main(String[] args): Establishes database connections, processes reservations and cancellations,
+ *   and invokes revenue calculation.
+ *   Inputs: args (String[]) - command line arguments
+ *   Outputs: void
+ *
+ * Important Data Structures:
+ * - Connection (from java.sql): Handles connections to the SQLite databases for rooms and reservations.
+ *
+ * Algorithms Used:
+ * - Uses standard JDBC connectivity procedures for SQLite. Operations include basic CRUD functions
+ *   for managing reservations. Specific algorithms for reservation and cancellation logic, and revenue
+ *   calculations are implemented in other classes not detailed in this snippet.
+ */
+
+public class TestSystem {
     public static void main(String[] args) {
         String roomsDbUrl = "jdbc:sqlite:hotel_rooms.db";
         String reservationsDbUrl = "jdbc:sqlite:reservations.db";

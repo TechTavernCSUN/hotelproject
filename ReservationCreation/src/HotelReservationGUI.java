@@ -16,6 +16,35 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class Name: HotelReservationGUI
+ * Date of the Code: 4/4/2024
+ * Programmer's Name: Jacob Spier
+ * Description: GUI application for managing hotel reservations using JavaFX. It provides interfaces for viewing
+ *              hotel rooms and managing reservations, with filters for room types, prices, and availability. It loads in
+ *              values from SQLite DB files.
+ *
+ * Important Functions:
+ * - start(Stage primaryStage): Initializes the UI components and loads initial data.
+ *   Inputs: primaryStage (Stage) - the primary stage for this application.
+ *   Outputs: void
+ * - loadData(ListView<String> hotelRoomsList, ListView<String> reservationsList, String roomType, String maxPrice, boolean availableOnly):
+ *   Loads data into the hotel rooms and reservations lists based on specified filters.
+ *   Inputs: hotelRoomsList (ListView<String>) - UI component for displaying hotel rooms,
+ *           reservationsList (ListView<String>) - UI component for displaying reservations,
+ *           roomType (String) - filter by room type,
+ *           maxPrice (String) - filter by maximum price,
+ *           availableOnly (boolean) - filter for only available rooms.
+ *   Outputs: void
+ *
+ * Important Data Structures:
+ * - ObservableList<String>: Used to manage lists of strings that are observed by the UI for changes, ensuring the UI updates automatically.
+ *
+ * Algorithms Used:
+ * - SQL queries are constructed dynamically based on user input to filter data. This involves assembling a WHERE clause based on provided filters.
+ * - Uses JavaFX for constructing and managing UI components, demonstrating a Model-View-Controller (MVC) architecture typically used in GUI applications.
+ */
+
 public class HotelReservationGUI extends Application {
 
     @Override
