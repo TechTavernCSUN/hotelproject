@@ -8,6 +8,28 @@ import java.util.Set;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * Class: DatabaseCreation
+ * Date: 2024-04-4
+ * Programmer: Jacob Spier
+ * Description: This class is designed to set up and initialize databases for hotel room bookings.
+ * It creates SQL tables for hotel rooms and reservations, and populates them with sample data.
+ * The class handles database connections, SQL statement executions, and initialization of tables with sample data.
+ *
+ * Key Operations:
+ * - main(): Orchestrates the creation and initialization of the hotel_rooms and reservations databases.
+ *   It establishes database connections, executes SQL commands to create and populate tables, and handles any exceptions that occur.
+ *
+ * Key Data Structures:
+ * - SAMPLE_GUESTS: A static array of guest details used to populate the reservations database.
+ * - Connection, Statement: Utilized for executing SQL queries and updates.
+ * - SimpleDateFormat, Calendar: Used for date manipulation and formatting related to reservations.
+ *
+ * Algorithm Description:
+ * - The class uses structured SQL queries to create and populate tables. It uses a simple for loop to iterate
+ *   through the SAMPLE_GUESTS array to assign rooms and create reservations based on predefined conditions
+ *   (room types and payment methods).
+ */
 public class DatabaseCreation {
     private static final String[][] SAMPLE_GUESTS = new String[][] {
             {"Alice Johnson", "alice.johnson@example.com"},

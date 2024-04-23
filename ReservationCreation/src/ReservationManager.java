@@ -7,8 +7,48 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 
+/**
+ * Class: ReservationManager
+ * Date: 2024-04-11
+ * Programmer: Jacob Spier
+ * Description: This class manages room reservations for a hotel. It provides functionalities to
+ * reserve and cancel reservations, and to check room availability and prices directly via SQL database
+ * interactions.
+ *
+ * Key Functions:
+ * - reserveRoom(): Reserves a room if available and updates reservation details in the database.
+ *   Inputs: Connections to room and reservation databases, room number, guest details, payment type, days stayed.
+ *   Outputs: boolean (true if reservation succeeds, false otherwise).
+ * - cancelReservation(): Cancels an existing reservation based on room number and guest email.
+ *   Inputs: Connections to room and reservation databases, room number, guest email.
+ *   Outputs: boolean (true if cancellation succeeds, false otherwise).
+ *
+ * Key Data Structures:
+ * - SQL Queries: Uses JDBC to execute SQL queries that interact with the hotel_rooms and reservations databases.
+ *
+ * Algorithm Description:
+ * - The reservation and cancellation algorithms use SQL transactions to ensure data integrity during
+ *   insertions and deletions. STRFTIME is used for date manipulation in SQL queries to filter records
+ *   by specific months and years.
+ */
+
 
 public class ReservationManager {
+
+    /**
+     * Attempts to reserve a room for a specified number of days with given payment details.
+     * Checks room availability and price, then inserts a reservation record into the database.
+     * Updates the room's reserved status upon successful reservation.
+     *
+     * @param roomsConnection Connection to the room database
+     * @param reservationsConnection Connection to the reservations database
+     * @param roomNumber the room number to reserve
+     * @param guestDetails array containing guest name and email
+     * @param paymentType type of payment (e.g., Credit/Debit, Cash)
+     * @param daysStayed number of days of the stay
+     * @return true if the reservation is successful, false otherwise
+     * @throws SQLException if any SQL errors occur during processing
+     */
 
     public static boolean reserveRoom(Connection roomsConnection, Connection reservationsConnection, int roomNumber, String[] guestDetails, String paymentType, int daysStayed) {
         try {
@@ -32,6 +72,14 @@ public class ReservationManager {
     }
 
 
+    /**
+     * Checks if a specified room is currently available.
+     *
+     * @param connection Database connection to the room database
+     * @param roomNumber The room number to check
+     * @return true if the room is available, false otherwise
+     * @throws SQLException if a database error occurs
+     */
     private static boolean isRoomAvailable(Connection connection, int roomNumber) throws SQLException {
         String sql = "SELECT RESERVED FROM HOTEL_ROOMS WHERE ROOM_NUMBER = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -44,6 +92,14 @@ public class ReservationManager {
         }
     }
 
+    /**
+     * Retrieves the current price of a specified room from the database.
+     *
+     * @param connection Database connection to the room database
+     * @param roomNumber The room number whose price is being queried
+     * @return The price of the room
+     * @throws SQLException if the room does not exist or a database error occurs
+     */
     private static double getRoomPrice(Connection connection, int roomNumber) throws SQLException {
         String sql = "SELECT PRICE FROM HOTEL_ROOMS WHERE ROOM_NUMBER = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -58,10 +114,23 @@ public class ReservationManager {
     }
 
 
+    /**
+     * Inserts a reservation record into the database using details provided.
+     *
+     * @param connection Database connection to the reservations database
+     * @param reservationId Unique ID for the new reservation
+     * @param guestDetails Array containing guest's name and email
+     * @param roomNumber Room number being reserved
+     * @param price Price of the room per night
+     * @param paymentType Payment method for the reservation
+     * @param daysStayed Duration of the stay in days
+     * @throws SQLException if a database error occurs during the insert
+     */
+
     private static void insertReservation(Connection connection, int reservationId, String[] guestDetails, int roomNumber, double price, String paymentType, int daysStayed) throws SQLException {
         double total = price * daysStayed;  // Calculate total based on the stay duration
 
-        // Using LocalDate for dynamic date handling
+        // Using LocalDate for current date handling
         LocalDate checkIn = LocalDate.now();
         LocalDate checkOut = checkIn.plusDays(daysStayed);
 
@@ -73,16 +142,23 @@ public class ReservationManager {
             pstmt.setInt(1, reservationId);
             pstmt.setString(2, guestDetails[1]); // Email
             pstmt.setString(3, guestDetails[0]); // Name
-            pstmt.setString(4, paymentType);
+            pstmt.setString(4, paymentType); // Payment
             pstmt.setString(5, checkIn.format(formatter)); // Formatted check-in date
             pstmt.setString(6, checkOut.format(formatter)); // Formatted check-out date
-            pstmt.setInt(7, roomNumber);
-            pstmt.setDouble(8, price);
+            pstmt.setInt(7, roomNumber); // Room Number
+            pstmt.setDouble(8, price); // Price per day of room number
             pstmt.setDouble(9, total);  // Set the calculated total
             pstmt.executeUpdate();
         }
     }
 
+    /**
+     * Retrieves the maximum current reservation ID from the database to ensure new reservation IDs are unique.
+     *
+     * @param connection Database connection to the reservations database
+     * @return the highest reservation ID present in the database
+     * @throws SQLException if a database error occurs during the query
+     */
     private static int getLatestReservationId(Connection connection) throws SQLException {
         String sql = "SELECT MAX(RESERVATION_ID) as max_id FROM RESERVATIONS";
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
@@ -93,9 +169,20 @@ public class ReservationManager {
         }
     }
 
+    /**
+     * Cancels a reservation based on room number and guest email. Ensures that both the reservation record is deleted
+     * and the room status is updated to not reserved, handling transactions to maintain database integrity.
+     *
+     * @param roomsConnection Connection to the room database
+     * @param reservationsConnection Connection to the reservations database
+     * @param roomNumber the room number associated with the reservation
+     * @param email the email of the guest whose reservation is to be canceled
+     * @return true if the cancellation is successful, false otherwise
+     * @throws SQLException if an error occurs during the database transaction
+     */
     public static boolean cancelReservation(Connection roomsConnection, Connection reservationsConnection, int roomNumber, String email) {
         try {
-            // Start transaction
+            // Open transaction
             roomsConnection.setAutoCommit(false);
             reservationsConnection.setAutoCommit(false);
 
@@ -143,6 +230,16 @@ public class ReservationManager {
         }
     }
 
+
+    /**
+     * Finds the reservation ID associated with a given room number and guest email.
+     *
+     * @param connection Database connection to the reservations database
+     * @param roomNumber Room number to check for reservation
+     * @param email Email associated with the reservation
+     * @return the reservation ID if found, -1 otherwise
+     * @throws SQLException if a database error occurs during the query
+     */
     private static int findReservationIdByEmailAndRoom(Connection connection, int roomNumber, String email) throws SQLException {
         String sql = "SELECT RESERVATION_ID FROM RESERVATIONS WHERE ROOM_NUMBER = ? AND EMAIL = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -157,6 +254,16 @@ public class ReservationManager {
         return -1; // Return -1 if no matching reservation is found
     }
 
+
+    /**
+     * Updates the reservation status of a room in the database.
+     *
+     * @param connection Database connection to the room database
+     * @param roomNumber the room number whose status is to be updated
+     * @param reserved the new reservation status (true if reserved, false if not)
+     * @return true if the update is successful, false otherwise
+     * @throws SQLException if a database error occurs during the update
+     */
     private static boolean updateRoomStatus(Connection connection, int roomNumber, boolean reserved) throws SQLException {
         String sql = "UPDATE HOTEL_ROOMS SET RESERVED = ? WHERE ROOM_NUMBER = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -167,6 +274,14 @@ public class ReservationManager {
         }
     }
 
+    /**
+     * Deletes a reservation from the database based on its ID.
+     *
+     * @param connection Database connection to the reservations database
+     * @param reservationId the ID of the reservation to delete
+     * @return true if the deletion is successful, false otherwise
+     * @throws SQLException if a database error occurs during the deletion
+     */
     private static boolean deleteReservation(Connection connection, int reservationId) throws SQLException {
         String sql = "DELETE FROM RESERVATIONS WHERE RESERVATION_ID = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
