@@ -3,6 +3,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RevenueCalculator {
 
@@ -12,16 +14,18 @@ public class RevenueCalculator {
         this.dbUrl = dbUrl;
     }
 
-    public void calculateMonthlyRevenue(int year, int month) {
-        // Corrected column name from COST to total as per the given schema information
+    public void calculateMonthlyRevenue() {
+        // Get current date
+        LocalDate currentDate = LocalDate.now();
+        // Format the current year and month in 'YYYY-MM' format
+        String monthString = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM"));
+
         String sql = "SELECT COUNT(*) AS room_count, SUM(total) AS total_revenue FROM reservations " +
                 "WHERE STRFTIME('%Y-%m', check_in) = ?";
 
         try (Connection conn = DriverManager.getConnection(dbUrl);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            // Format the year and month in 'YYYY-MM' format
-            String monthString = String.format("%04d-%02d", year, month);
             pstmt.setString(1, monthString);
 
             ResultSet rs = pstmt.executeQuery();

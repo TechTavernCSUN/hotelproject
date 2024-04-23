@@ -43,8 +43,8 @@ public class Main {
 
         RevenueCalculator calculator = new RevenueCalculator(reservationsDbUrl);
 
-        // Example to calculate revenue for  2024
-        calculator.calculateMonthlyRevenue(2024, 4);
+        //Calculate revenue for year
+        calculator.calculateMonthlyRevenue();
     }
 }
 
