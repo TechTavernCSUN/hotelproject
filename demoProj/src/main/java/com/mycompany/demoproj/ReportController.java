@@ -13,6 +13,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import javafx.scene.control.TextField;
+import javafx.collections.transformation.FilteredList;
 
 public class ReportController implements Initializable {
 
@@ -26,6 +28,8 @@ public class ReportController implements Initializable {
     @FXML private TableColumn<Reservation, String> columnPayment;
     @FXML private TableColumn<Reservation, Number> columnPrice;
     @FXML private TableColumn<Reservation, Number> columnTotal;
+    @FXML private TextField searchField;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -39,14 +43,24 @@ public class ReportController implements Initializable {
         columnPrice.setCellValueFactory(cellData -> cellData.getValue().priceProperty());
         columnTotal.setCellValueFactory(cellData -> cellData.getValue().totalProperty());
 
-        loadReservationData();
+        loadReservationData("");
+        
+        // Add listener to search field to filter data based on client email
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            loadReservationData(newValue);
+        });
     }
 
-    private void loadReservationData() {
+    private void loadReservationData(String searchFilter) {
         ObservableList<Reservation> reservations = FXCollections.observableArrayList();
         String url = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\reservations.db";
         String query = "SELECT * FROM RESERVATIONS";
 
+        // Modify query to filter by client email if search filter is not empty
+        if (searchFilter != null && !searchFilter.isEmpty()) {
+            query += " WHERE EMAIL LIKE '%" + searchFilter + "%'";
+        }
+        
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -73,6 +87,7 @@ public class ReportController implements Initializable {
     @FXML
     private void handleBack() throws IOException {
         // Replace "App.setRoot("primary")" with your own method to change scenes or close the window
+        App.setRoot("primary");
         System.out.println("Back button pressed - implement scene change or window close.");
     }
 }
