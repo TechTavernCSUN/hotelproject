@@ -7,10 +7,16 @@ public class Main {
         String roomsDbUrl = "jdbc:sqlite:hotel_rooms.db";
         String reservationsDbUrl = "jdbc:sqlite:reservations.db";
 
+
+
         try (Connection roomsConnection = DriverManager.getConnection(roomsDbUrl);
              Connection reservationsConnection = DriverManager.getConnection(reservationsDbUrl)) {
 
-            boolean success = ReservationManager.reserveRoom(roomsConnection, reservationsConnection, 19, new String[]{"John Doe", "john.doe@example.com"});
+            String paymentType = "Cash";
+            int daysStayed = 4;
+            int roomNumber = 19;
+
+            boolean success = ReservationManager.reserveRoom(roomsConnection, reservationsConnection, roomNumber, new String[]{"John Doe", "john.doe@example.com"}, paymentType, daysStayed);
             if (success) {
                 System.out.println("Room reserved successfully.");
             } else {
@@ -24,7 +30,7 @@ public class Main {
              Connection reservationsConnection = DriverManager.getConnection(reservationsDbUrl)) {
 
             int roomNumber = 2;
-            String email = "alice.johnson@example.com";
+            String email = "bob.smith@example.com";
             boolean success = ReservationManager.cancelReservation(roomsConnection, reservationsConnection, roomNumber, email);
             if (success) {
                 System.out.println("Reservation cancelled successfully.");

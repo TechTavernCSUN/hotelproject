@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class ReservationManager {
 
-    public static boolean reserveRoom(Connection roomsConnection, Connection reservationsConnection, int roomNumber, String[] guestDetails) {
+    public static boolean reserveRoom(Connection roomsConnection, Connection reservationsConnection, int roomNumber, String[] guestDetails, String paymentType, int daysStayed) {
         try {
             if (!isRoomAvailable(roomsConnection, roomNumber)) {
                 System.out.println("Room " + roomNumber + " is not available for reservation as it is already reserved.");
@@ -20,7 +20,7 @@ public class ReservationManager {
             double price = getRoomPrice(roomsConnection, roomNumber);  // Ensure this method fetches the price correctly
 
             int reservationId = getLatestReservationId(reservationsConnection) + 1;
-            insertReservation(reservationsConnection, reservationId, guestDetails, roomNumber, price);  // Pass price here
+            insertReservation(reservationsConnection, reservationId, guestDetails, roomNumber, price, paymentType, daysStayed);  // Pass paymentType and daysStayed here
 
             updateRoomStatus(roomsConnection, roomNumber, true);
 
@@ -58,25 +58,30 @@ public class ReservationManager {
     }
 
 
-    private static void insertReservation(Connection connection, int reservationId, String[] guestDetails, int roomNumber, double price) throws SQLException {
-        // Assuming a static stay duration for demonstration
-        int stayDuration = 4;  // e.g., 4 days stay
-        double total = price * stayDuration;  // Calculate total based on the stay duration
+    private static void insertReservation(Connection connection, int reservationId, String[] guestDetails, int roomNumber, double price, String paymentType, int daysStayed) throws SQLException {
+        double total = price * daysStayed;  // Calculate total based on the stay duration
+
+        // Using LocalDate for dynamic date handling
+        LocalDate checkIn = LocalDate.now();
+        LocalDate checkOut = checkIn.plusDays(daysStayed);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         String sql = "INSERT INTO RESERVATIONS (RESERVATION_ID, EMAIL, NAME, PAYMENT, CHECK_IN, CHECK_OUT, ROOM_NUMBER, PRICE, TOTAL) " +
-                "VALUES (?, ?, ?, ?, '2024-01-01', '2024-01-05', ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, reservationId);
             pstmt.setString(2, guestDetails[1]); // Email
             pstmt.setString(3, guestDetails[0]); // Name
-            pstmt.setString(4, new Random().nextBoolean() ? "Credit/Debit" : "Cash");
-            pstmt.setInt(5, roomNumber);
-            pstmt.setDouble(6, price);
-            pstmt.setDouble(7, total);  // Set the calculated total
+            pstmt.setString(4, paymentType);
+            pstmt.setString(5, checkIn.format(formatter)); // Formatted check-in date
+            pstmt.setString(6, checkOut.format(formatter)); // Formatted check-out date
+            pstmt.setInt(7, roomNumber);
+            pstmt.setDouble(8, price);
+            pstmt.setDouble(9, total);  // Set the calculated total
             pstmt.executeUpdate();
         }
     }
-
 
     private static int getLatestReservationId(Connection connection) throws SQLException {
         String sql = "SELECT MAX(RESERVATION_ID) as max_id FROM RESERVATIONS";
