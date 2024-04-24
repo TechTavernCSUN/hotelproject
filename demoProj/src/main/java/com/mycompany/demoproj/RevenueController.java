@@ -11,15 +11,26 @@ import javafx.event.ActionEvent;
 
 import java.time.LocalDate;
 import javafx.scene.control.Label;
+import javafx.util.Pair;
 
 public class RevenueController implements Initializable {
 
     @FXML
     private Label dateLabel;
+    
+    @FXML
+    private Label totalRoomsLabel;
+
+    @FXML
+    private Label totalRevenueLabel;
+
+    private RevenueCalculator revenueCalculator;
 
     @FXML
     private Button backButton;
 
+    String reservationsDbUrl = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\reservations.db";
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Get the first day of the current month
@@ -30,6 +41,25 @@ public class RevenueController implements Initializable {
 
         // Set the label text with the date range
         dateLabel.setText("From: " + firstDayOfMonth + "  To: " + lastDayOfMonth);
+        
+        // Instantiate the RevenueCalculator with the database URL
+        revenueCalculator = new RevenueCalculator(reservationsDbUrl);
+
+        // Call the method to calculate monthly revenue and update labels
+        updateRevenueDetails();
+    }
+    
+    private void updateRevenueDetails() {
+        // Call the calculateMonthlyRevenue method to get the revenue details
+        Pair<Integer, Double> revenueDetails = revenueCalculator.calculateMonthlyRevenue();
+
+        // Get the total rooms booked and total revenue from the Pair
+        int totalRoomsBooked = revenueDetails.getKey();
+        double totalRevenue = revenueDetails.getValue();
+
+        // Update the labels in the UI with these values
+        totalRoomsLabel.setText("Total Rooms Booked: " + totalRoomsBooked);
+        totalRevenueLabel.setText("Total Revenue: $" + totalRevenue);
     }
 
     @FXML
