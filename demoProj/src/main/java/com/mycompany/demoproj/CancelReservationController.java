@@ -12,12 +12,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.io.IOException;
 import java.sql.SQLException;
+import javafx.scene.control.Label;
 
 
 public class CancelReservationController implements Initializable {
     
     @FXML private TextField roomNumberField;
     @FXML private TextField emailField;
+    
+    @FXML private Label errorLabel;
     
     
     @Override
@@ -42,15 +45,18 @@ public class CancelReservationController implements Initializable {
             // Display success or failure message
             if (success) {
                 System.out.println("Reservation cancelled successfully.");
+                // Return to the primary scene
+                App.setRoot("primary");
             } else {
                 System.out.println("Failed to cancel reservation.");
+                // Update error label
+                errorLabel.setText("Failed to cancel reservation.");
             }
         } catch (SQLException e) {
+            errorLabel.setText("Database connection error: " + e.getMessage());
             System.err.println("Database connection error: " + e.getMessage());
         }
         
-        // Return to the primary scene
-        App.setRoot("primary");
     }
     
     @FXML
