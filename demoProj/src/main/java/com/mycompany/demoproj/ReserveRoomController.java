@@ -93,7 +93,7 @@ public class ReserveRoomController {
         }
         
         // Get the selected payment option
-        String paymentOption = cashRadioButton.isSelected() ? "Cash" : "Card";
+        String paymentOption = cashRadioButton.isSelected() ? "Cash" : "Credit/Debit";
 
         // Calculate the cost
         double cost = selectedRoom.getPricePerNight() * numberOfDays;
