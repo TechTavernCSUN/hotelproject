@@ -8,7 +8,7 @@ public class ConfirmationController {
     @FXML
     private Label confirmationMessageLabel;
 
-    public void setReservationDetails(Room room, int numberOfDays, int cost) {
+    public void setReservationDetails(Room room, int numberOfDays, double cost) {
         confirmationMessageLabel.setText("Your reservation for Room " + room.getRoomId() +
                 " for " + numberOfDays + " day(s) has been confirmed. Total cost: $" + cost + ".");
     }

@@ -1,6 +1,8 @@
 package com.mycompany.demoproj;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +10,7 @@ import javafx.stage.Modality;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 
 public class PrimaryController {
 
@@ -19,11 +22,44 @@ public class PrimaryController {
 
     @FXML
     private Button managerSignInButton;
+    
 
+    private static boolean managerLoggedIn = false;
+
+    @FXML
+    public void initialize() {
+        // Set the initial manager login status
+        setManagerLoggedIn(managerLoggedIn);
+    }
+    
     // Add an action handler for the manager sign in button
     @FXML
     private void handleSignIn() throws IOException {
-        App.setRoot("ManagerLogin");
+        if (managerLoggedIn) {
+            managerLoggedIn = false;
+            managerSignInButton.setText("Manager Sign In");
+            generateReportButton.setVisible(false);
+            generateRevenueButton.setVisible(false);
+        } else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ManagerLogin.fxml"));
+            Parent root = loader.load();
+            ManagerLoginController managerLoginController = loader.getController();
+            managerLoginController.setPrimaryController(this); // Inject PrimaryController instance
+            App.setRoot("ManagerLogin");
+        }
+    }
+    
+    public void setManagerLoggedIn(boolean loggedIn) {
+        managerLoggedIn = loggedIn;
+        if (loggedIn) {
+            managerSignInButton.setText("Log Out");
+            generateReportButton.setVisible(true);
+            generateRevenueButton.setVisible(true);
+        } else {
+            managerSignInButton.setText("Manager Sign In");
+            generateReportButton.setVisible(false);
+            generateRevenueButton.setVisible(false);
+        }
     }
     
     @FXML
@@ -60,17 +96,4 @@ public class PrimaryController {
         stage.show();
     }
     
-    // Add setters for the buttons
-    public void setGenerateReportButtonVisible(boolean visible) {
-        generateReportButton.setVisible(visible);
-    }
-
-    public void setGenerateRevenueButtonVisible(boolean visible) {
-        generateRevenueButton.setVisible(visible);
-    }
-    
-    // Add setter for manager sign-in button text
-    public void setManagerSignInButton(String text) {
-        managerSignInButton.setText(text);
-    }
 }

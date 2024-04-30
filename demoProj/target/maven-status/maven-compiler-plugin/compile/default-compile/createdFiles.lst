@@ -9,6 +9,7 @@ com\mycompany\demoproj\ConfirmationController.class
 com\mycompany\demoproj\RevenueController.class
 com\mycompany\demoproj\BookRoomController$1.class
 com\mycompany\demoproj\Room.class
+com\mycompany\demoproj\RevenueCalculator.class
 com\mycompany\demoproj\Hotel.class
 com\mycompany\demoproj\ManagerLoginController.class
 com\mycompany\demoproj\ReservationManager.class

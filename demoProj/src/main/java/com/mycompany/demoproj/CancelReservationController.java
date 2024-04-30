@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
+
 package com.mycompany.demoproj;
 
 import java.io.IOException;
@@ -9,17 +6,23 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 
-/**
- * FXML Controller class
- *
- * @author Michael
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.io.IOException;
+import java.sql.SQLException;
+import javafx.scene.control.Label;
+
+
 public class CancelReservationController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
+    
+    @FXML private TextField roomNumberField;
+    @FXML private TextField emailField;
+    
+    @FXML private Label errorLabel;
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -27,7 +30,33 @@ public class CancelReservationController implements Initializable {
     
     @FXML
     private void handleCancel() throws IOException {
-        App.setRoot("primary");
+        String reservationsDbUrl = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\reservations.db";
+        String roomsDbUrl = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\hotel_rooms.db";
+        
+        try (Connection roomsConnection = DriverManager.getConnection(roomsDbUrl);
+             Connection reservationsConnection = DriverManager.getConnection(reservationsDbUrl)) {
+            
+            // Retrieve room number and email from text fields
+            int roomNumber = Integer.parseInt(roomNumberField.getText());
+            String email = emailField.getText();
+            
+            boolean success = ReservationManager.cancelReservation(roomsConnection, reservationsConnection, roomNumber, email);
+            
+            // Display success or failure message
+            if (success) {
+                System.out.println("Reservation cancelled successfully.");
+                // Return to the primary scene
+                App.setRoot("primary");
+            } else {
+                System.out.println("Failed to cancel reservation.");
+                // Update error label
+                errorLabel.setText("Failed to cancel reservation.");
+            }
+        } catch (SQLException e) {
+            errorLabel.setText("Database connection error: " + e.getMessage());
+            System.err.println("Database connection error: " + e.getMessage());
+        }
+        
     }
     
     @FXML
