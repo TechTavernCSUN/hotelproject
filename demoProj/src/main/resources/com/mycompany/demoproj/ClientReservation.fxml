@@ -27,8 +27,11 @@
     </top>
     <center>
         <VBox alignment="CENTER" prefHeight="300.0" prefWidth="600.0" spacing="10.0">
-            <TextField fx:id="emailField" promptText="Enter your email" />
-            <TableView fx:id="reservationTable" visible="false">
+            <HBox alignment="CENTER" spacing="10">
+                <TextField fx:id="emailField" promptText="Enter your email" />
+                <Button text="Search" onAction="#handleSearch"/>
+            </HBox>
+            <TableView fx:id="reservationTable" visible="true">
                 <columns>
                     <TableColumn fx:id="emailColumn" prefWidth="88.0" text="Email" />
                     <TableColumn fx:id="nameColumn" prefWidth="88.0" text="Name" />

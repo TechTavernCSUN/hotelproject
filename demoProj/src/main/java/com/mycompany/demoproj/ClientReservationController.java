@@ -37,8 +37,20 @@ public class ClientReservationController implements Initializable {
 
         // Add listener to email field to update reservation data when email is entered
         emailField.textProperty().addListener((observable, oldValue, newValue) -> {
-            loadReservationData(newValue);
+            //loadReservationData(newValue);
+            // Clear the table if the email field is empty
+            if(newValue.isEmpty()) {
+                reservationTable.getItems().clear();
+            }
         });
+    }
+    
+    @FXML
+    private void handleSearch() {
+        String email = emailField.getText();
+        if (!email.isEmpty() && email.contains("@")) {
+            loadReservationData(email);
+        }
     }
 
     private void loadReservationData(String email) {
