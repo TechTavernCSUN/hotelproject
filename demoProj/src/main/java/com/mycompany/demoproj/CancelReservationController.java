@@ -30,8 +30,8 @@ public class CancelReservationController implements Initializable {
     
     @FXML
     private void handleCancel() throws IOException {
-        String reservationsDbUrl = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\reservations.db";
-        String roomsDbUrl = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\hotel_rooms.db";
+        String reservationsDbUrl = "jdbc:sqlite:reservations.db";
+        String roomsDbUrl = "jdbc:sqlite:hotel_rooms.db";
         
         try (Connection roomsConnection = DriverManager.getConnection(roomsDbUrl);
              Connection reservationsConnection = DriverManager.getConnection(reservationsDbUrl)) {

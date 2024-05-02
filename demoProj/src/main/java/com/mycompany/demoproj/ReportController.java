@@ -53,7 +53,7 @@ public class ReportController implements Initializable {
 
     private void loadReservationData(String searchFilter) {
         ObservableList<Reservation> reservations = FXCollections.observableArrayList();
-        String url = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\reservations.db";
+        String url = "jdbc:sqlite:reservations.db";
         String query = "SELECT * FROM RESERVATIONS";
 
         // Modify query to filter by client email if search filter is not empty
