@@ -1,0 +1,21 @@
+@startuml
+class ReservationManager {
+    - Connection roomsConnection
+    - Connection reservationsConnection
+
+    + boolean reserveRoom(Connection, Connection, int, String[], String, int)
+    + boolean cancelReservation(Connection, Connection, int, String)
+    {static} - boolean isRoomAvailable(Connection, int)
+    {static} - double getRoomPrice(Connection, int)
+    {static} - void insertReservation(Connection, int, String[], int, double, String, int)
+    {static} - int getLatestReservationId(Connection)
+    {static} - int findReservationIdByEmailAndRoom(Connection, int, String)
+    {static} - boolean updateRoomStatus(Connection, int, boolean)
+    {static} - boolean deleteReservation(Connection, int)
+}
+
+note right of ReservationManager
+  ReservationManager handles all database interactions
+  for managing room reservations.
+end note
+@enduml

@@ -77,6 +77,8 @@ public class DatabaseCreation {
             // Open connections to the databases
             roomsConnection = DriverManager.getConnection("jdbc:sqlite:hotel_rooms.db");
             reservationsConnection = DriverManager.getConnection("jdbc:sqlite:reservations.db");
+            System.out.println("Current working directory: " + System.getProperty("user.dir"));
+
             System.out.println("Opened databases successfully");
 
             // Create statements for each database
