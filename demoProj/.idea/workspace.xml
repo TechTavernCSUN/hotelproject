@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0eaeacd6-8f0e-44d7-b664-94983a4de658" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/Assembly/bin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/config/DatabaseConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ReservationCreation/hotel_room.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ReservationCreation/hotel_rooms.db" beforeDir="false" afterPath="$PROJECT_DIR$/../ReservationCreation/hotel_rooms.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ReservationCreation/reservation.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ReservationCreation/reservations.db" beforeDir="false" afterPath="$PROJECT_DIR$/../ReservationCreation/reservations.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ReservationCreation/src/DatabaseCreation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ReservationCreation/src/DatabaseCreation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ReservationCreation/src/HotelReservationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ReservationCreation/src/HotelReservationGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotel_rooms.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reservations.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/BookRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/BookRoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/CancelReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/CancelReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/ClientReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/ClientReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/ReserveRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/ReserveRoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/RevenueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/RevenueController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/hotel_rooms.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mycompany/reservations.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/BookRoomController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/BookRoomController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/BookRoomController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/BookRoomController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/CancelReservationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/CancelReservationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/ClientReservationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/ClientReservationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/ReportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/ReportController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/ReserveRoomController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/ReserveRoomController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/RevenueController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mycompany/demoproj/RevenueController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2g6s5A7AmV4gi9v9mmyGGFK8ORv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jacob/Downloads/slf4j-api-2.1.0-alpha1.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jacob\hotelproject\demoProj\src\main\java\com\mycompany\demoproj" />
+      <recent name="C:\Users\jacob\hotelproject\demoProj\src\main\resources\Databases" />
+      <recent name="C:\Users\jacob\hotelproject\demoProj\src\main\resources\reservation.sb" />
+      <recent name="C:\Users\jacob\hotelproject\demoProj\src\main\resources" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-temurin-21.0.2-4caba194b151-7da56cdf" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0eaeacd6-8f0e-44d7-b664-94983a4de658" name="Changes" comment="" />
+      <created>1715029176119</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1715029176119</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/demoproj/App.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
