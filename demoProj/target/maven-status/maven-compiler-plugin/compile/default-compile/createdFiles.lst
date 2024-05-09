@@ -1,5 +1,6 @@
 com\mycompany\demoproj\PrimaryController.class
 com\mycompany\demoproj\Client.class
+com\mycompany\demoproj\Main.class
 com\mycompany\demoproj\App.class
 com\mycompany\demoproj\BookRoomController.class
 module-info.class

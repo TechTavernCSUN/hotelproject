@@ -1,23 +1,22 @@
 package com.mycompany.demoproj;
 
-import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
-import javafx.event.ActionEvent;
-
-import java.time.LocalDate;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 
 public class RevenueController implements Initializable {
 
     @FXML
     private Label dateLabel;
-    
+
     @FXML
     private Label totalRoomsLabel;
 
@@ -30,7 +29,7 @@ public class RevenueController implements Initializable {
     private Button backButton;
 
     String reservationsDbUrl = "jdbc:sqlite:reservations.db";
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Get the first day of the current month
@@ -41,14 +40,14 @@ public class RevenueController implements Initializable {
 
         // Set the label text with the date range
         dateLabel.setText("From: " + firstDayOfMonth + "  To: " + lastDayOfMonth);
-        
+
         // Instantiate the RevenueCalculator with the database URL
         revenueCalculator = new RevenueCalculator(reservationsDbUrl);
 
         // Call the method to calculate monthly revenue and update labels
         updateRevenueDetails();
     }
-    
+
     private void updateRevenueDetails() {
         // Call the calculateMonthlyRevenue method to get the revenue details
         Pair<Integer, Double> revenueDetails = revenueCalculator.calculateMonthlyRevenue();

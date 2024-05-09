@@ -1,25 +1,32 @@
 
 package com.mycompany.demoproj;
 
-import javafx.beans.binding.Bindings;
-import javafx.collections.transformation.FilteredList;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class BookRoomController {
     @FXML
@@ -57,8 +64,8 @@ public class BookRoomController {
                     .otherwise("Reserved");
         });
 
-        loadRoomData();    
-        
+        loadRoomData();
+
         // Initialize reserve column
         reserveColumn.setCellFactory(param -> new TableCell<>() {
             private final Button reserveButton = new Button("Reserve");
@@ -106,7 +113,7 @@ public class BookRoomController {
             label.setFont(font);
         }
     }
-    
+
     private void loadRoomData() {
         ObservableList<Room> rooms = FXCollections.observableArrayList();
         String url = "jdbc:sqlite:hotel_rooms.db";
@@ -129,7 +136,7 @@ public class BookRoomController {
             e.printStackTrace();
         }
     }
-    
+
     @FXML
     private void handleBack() throws IOException {
         System.out.println("Current working directory: " + System.getProperty("user.dir"));

@@ -1,10 +1,9 @@
 
 package com.mycompany.demoproj;
 
-import java.util.Date;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Reservation {
     private final SimpleIntegerProperty reservationId;
@@ -15,7 +14,7 @@ public class Reservation {
     private final SimpleStringProperty checkOut;
     private final SimpleStringProperty payment;
     private final SimpleDoubleProperty price;
-    private final SimpleDoubleProperty total; 
+    private final SimpleDoubleProperty total;
 
     public Reservation(int reservationId, String email, String name, int roomNumber, String checkIn, String checkOut, String payment, double price, double total) {
         this.reservationId = new SimpleIntegerProperty(reservationId);

@@ -1,0 +1,201 @@
+@startuml
+annotation java.lang.Override
+annotation javafx.fxml.FXML
+class com.mycompany.demoproj.App
+class com.mycompany.demoproj.BookRoomController
+class com.mycompany.demoproj.CancelReservationController
+class com.mycompany.demoproj.Client
+class com.mycompany.demoproj.ClientReservationController
+class com.mycompany.demoproj.Hotel
+class com.mycompany.demoproj.Manager
+class com.mycompany.demoproj.ManagerLoginController
+class com.mycompany.demoproj.PrimaryController
+class com.mycompany.demoproj.ReportController
+class com.mycompany.demoproj.Reservation
+class com.mycompany.demoproj.ReservationManager
+class com.mycompany.demoproj.ReserveRoomController
+class com.mycompany.demoproj.RevenueCalculator
+class com.mycompany.demoproj.RevenueController
+class com.mycompany.demoproj.Room
+class java.io.IOException
+class java.net.URL
+class java.sql.Connection
+class java.sql.DriverManager
+class java.sql.PreparedStatement
+class java.sql.ResultSet
+class java.sql.SQLException
+class java.sql.Statement
+class java.time.LocalDate
+class java.time.format.DateTimeFormatter
+class java.util.Date
+class java.util.HashMap
+class java.util.List
+class java.util.Map
+class java.util.Random
+class java.util.ResourceBundle
+class javafx.application.Application
+class javafx.beans.binding.Bindings
+class javafx.beans.property.BooleanProperty
+class javafx.beans.property.SimpleDoubleProperty
+class javafx.beans.property.SimpleIntegerProperty
+class javafx.beans.property.SimpleStringProperty
+class javafx.collections.FXCollections
+class javafx.collections.ObservableList
+class javafx.collections.transformation.FilteredList
+class javafx.event.ActionEvent
+class javafx.fxml.FXMLLoader
+class javafx.scene.Parent
+class javafx.scene.Scene
+class javafx.scene.control.Button
+class javafx.scene.control.Label
+class javafx.scene.control.PasswordField
+class javafx.scene.control.RadioButton
+class javafx.scene.control.Spinner
+class javafx.scene.control.SpinnerValueFactory
+class javafx.scene.control.TableColumn
+class javafx.scene.control.TableView
+class javafx.scene.control.TextField
+class javafx.scene.layout.BorderPane
+class javafx.scene.layout.HBox
+class javafx.scene.text.Font
+class javafx.stage.Modality
+class javafx.stage.Stage
+class javafx.util.Pair
+interface javafx.fxml.Initializable
+com.mycompany.demoproj.App ..> java.lang.Override
+com.mycompany.demoproj.App ..> java.io.IOException
+com.mycompany.demoproj.App --|> javafx.application.Application
+com.mycompany.demoproj.App ..> javafx.fxml.FXMLLoader
+com.mycompany.demoproj.App ..> javafx.scene.Parent
+com.mycompany.demoproj.App ..> javafx.scene.Scene
+com.mycompany.demoproj.App ..> javafx.stage.Stage
+com.mycompany.demoproj.BookRoomController ..> java.lang.Override
+com.mycompany.demoproj.BookRoomController ..> javafx.fxml.FXML
+com.mycompany.demoproj.BookRoomController ..> java.io.IOException
+com.mycompany.demoproj.BookRoomController ..> java.sql.Connection
+com.mycompany.demoproj.BookRoomController ..> java.sql.DriverManager
+com.mycompany.demoproj.BookRoomController ..> java.sql.ResultSet
+com.mycompany.demoproj.BookRoomController ..> java.sql.Statement
+com.mycompany.demoproj.BookRoomController ..> javafx.beans.binding.Bindings
+com.mycompany.demoproj.BookRoomController ..> javafx.beans.property.BooleanProperty
+com.mycompany.demoproj.BookRoomController ..> javafx.collections.FXCollections
+com.mycompany.demoproj.BookRoomController ..> javafx.collections.ObservableList
+com.mycompany.demoproj.BookRoomController ..> javafx.collections.transformation.FilteredList
+com.mycompany.demoproj.BookRoomController ..> javafx.fxml.FXMLLoader
+com.mycompany.demoproj.BookRoomController ..> javafx.scene.Parent
+com.mycompany.demoproj.BookRoomController ..> javafx.scene.Scene
+com.mycompany.demoproj.BookRoomController ..> javafx.scene.layout.HBox
+com.mycompany.demoproj.BookRoomController ..> javafx.scene.text.Font
+com.mycompany.demoproj.BookRoomController ..> javafx.stage.Modality
+com.mycompany.demoproj.BookRoomController ..> javafx.stage.Stage
+com.mycompany.demoproj.CancelReservationController ..> java.lang.Override
+com.mycompany.demoproj.CancelReservationController ..> javafx.fxml.FXML
+com.mycompany.demoproj.CancelReservationController ..> java.io.IOException
+com.mycompany.demoproj.CancelReservationController ..> java.net.URL
+com.mycompany.demoproj.CancelReservationController ..> java.sql.Connection
+com.mycompany.demoproj.CancelReservationController ..> java.sql.DriverManager
+com.mycompany.demoproj.CancelReservationController ..> java.sql.SQLException
+com.mycompany.demoproj.CancelReservationController ..> java.util.ResourceBundle
+com.mycompany.demoproj.CancelReservationController ..> javafx.scene.control.Label
+com.mycompany.demoproj.CancelReservationController ..> javafx.scene.control.TextField
+com.mycompany.demoproj.CancelReservationController --|> javafx.fxml.Initializable
+com.mycompany.demoproj.ClientReservationController ..> java.lang.Override
+com.mycompany.demoproj.ClientReservationController ..> javafx.fxml.FXML
+com.mycompany.demoproj.ClientReservationController ..> java.io.IOException
+com.mycompany.demoproj.ClientReservationController ..> java.net.URL
+com.mycompany.demoproj.ClientReservationController ..> java.sql.Connection
+com.mycompany.demoproj.ClientReservationController ..> java.sql.DriverManager
+com.mycompany.demoproj.ClientReservationController ..> java.sql.ResultSet
+com.mycompany.demoproj.ClientReservationController ..> java.sql.Statement
+com.mycompany.demoproj.ClientReservationController ..> java.util.ResourceBundle
+com.mycompany.demoproj.ClientReservationController ..> javafx.collections.FXCollections
+com.mycompany.demoproj.ClientReservationController ..> javafx.collections.ObservableList
+com.mycompany.demoproj.ClientReservationController ..> javafx.scene.control.TableColumn
+com.mycompany.demoproj.ClientReservationController ..> javafx.scene.control.TableView
+com.mycompany.demoproj.ClientReservationController ..> javafx.scene.control.TextField
+com.mycompany.demoproj.ClientReservationController --|> javafx.fxml.Initializable
+com.mycompany.demoproj.Manager ..> java.util.List
+com.mycompany.demoproj.ManagerLoginController ..> javafx.fxml.FXML
+com.mycompany.demoproj.ManagerLoginController ..> java.io.IOException
+com.mycompany.demoproj.ManagerLoginController ..> java.util.HashMap
+com.mycompany.demoproj.ManagerLoginController ..> java.util.Map
+com.mycompany.demoproj.ManagerLoginController ..> javafx.scene.Scene
+com.mycompany.demoproj.ManagerLoginController ..> javafx.scene.control.Label
+com.mycompany.demoproj.ManagerLoginController ..> javafx.scene.control.PasswordField
+com.mycompany.demoproj.ManagerLoginController ..> javafx.scene.control.TextField
+com.mycompany.demoproj.ManagerLoginController ..> javafx.scene.layout.BorderPane
+com.mycompany.demoproj.PrimaryController ..> javafx.fxml.FXML
+com.mycompany.demoproj.PrimaryController ..> java.io.IOException
+com.mycompany.demoproj.PrimaryController ..> java.net.URL
+com.mycompany.demoproj.PrimaryController ..> java.util.ResourceBundle
+com.mycompany.demoproj.PrimaryController ..> javafx.fxml.FXMLLoader
+com.mycompany.demoproj.PrimaryController ..> javafx.scene.Parent
+com.mycompany.demoproj.PrimaryController ..> javafx.scene.Scene
+com.mycompany.demoproj.PrimaryController ..> javafx.scene.control.Button
+com.mycompany.demoproj.PrimaryController ..> javafx.scene.control.Label
+com.mycompany.demoproj.PrimaryController ..> javafx.stage.Modality
+com.mycompany.demoproj.PrimaryController ..> javafx.stage.Stage
+com.mycompany.demoproj.ReportController ..> java.lang.Override
+com.mycompany.demoproj.ReportController ..> javafx.fxml.FXML
+com.mycompany.demoproj.ReportController ..> java.io.IOException
+com.mycompany.demoproj.ReportController ..> java.net.URL
+com.mycompany.demoproj.ReportController ..> java.sql.Connection
+com.mycompany.demoproj.ReportController ..> java.sql.DriverManager
+com.mycompany.demoproj.ReportController ..> java.sql.ResultSet
+com.mycompany.demoproj.ReportController ..> java.sql.Statement
+com.mycompany.demoproj.ReportController ..> java.util.ResourceBundle
+com.mycompany.demoproj.ReportController ..> javafx.collections.FXCollections
+com.mycompany.demoproj.ReportController ..> javafx.collections.ObservableList
+com.mycompany.demoproj.ReportController ..> javafx.collections.transformation.FilteredList
+com.mycompany.demoproj.ReportController ..> javafx.scene.control.TableColumn
+com.mycompany.demoproj.ReportController ..> javafx.scene.control.TableView
+com.mycompany.demoproj.ReportController ..> javafx.scene.control.TextField
+com.mycompany.demoproj.ReportController --|> javafx.fxml.Initializable
+com.mycompany.demoproj.Reservation ..> java.util.Date
+com.mycompany.demoproj.Reservation ..> javafx.beans.property.SimpleDoubleProperty
+com.mycompany.demoproj.Reservation ..> javafx.beans.property.SimpleIntegerProperty
+com.mycompany.demoproj.Reservation ..> javafx.beans.property.SimpleStringProperty
+com.mycompany.demoproj.ReservationManager ..> java.sql.Connection
+com.mycompany.demoproj.ReservationManager ..> java.sql.PreparedStatement
+com.mycompany.demoproj.ReservationManager ..> java.sql.ResultSet
+com.mycompany.demoproj.ReservationManager ..> java.sql.SQLException
+com.mycompany.demoproj.ReservationManager ..> java.sql.Statement
+com.mycompany.demoproj.ReservationManager ..> java.time.LocalDate
+com.mycompany.demoproj.ReservationManager ..> java.time.format.DateTimeFormatter
+com.mycompany.demoproj.ReservationManager ..> java.util.Random
+com.mycompany.demoproj.ReserveRoomController ..> javafx.fxml.FXML
+com.mycompany.demoproj.ReserveRoomController ..> java.io.IOException
+com.mycompany.demoproj.ReserveRoomController ..> java.sql.Connection
+com.mycompany.demoproj.ReserveRoomController ..> java.sql.DriverManager
+com.mycompany.demoproj.ReserveRoomController ..> java.sql.SQLException
+com.mycompany.demoproj.ReserveRoomController ..> javafx.fxml.FXMLLoader
+com.mycompany.demoproj.ReserveRoomController ..> javafx.scene.Parent
+com.mycompany.demoproj.ReserveRoomController ..> javafx.scene.Scene
+com.mycompany.demoproj.ReserveRoomController ..> javafx.scene.control.Label
+com.mycompany.demoproj.ReserveRoomController ..> javafx.scene.control.RadioButton
+com.mycompany.demoproj.ReserveRoomController ..> javafx.scene.control.Spinner
+com.mycompany.demoproj.ReserveRoomController ..> javafx.scene.control.SpinnerValueFactory
+com.mycompany.demoproj.ReserveRoomController ..> javafx.scene.control.TextField
+com.mycompany.demoproj.ReserveRoomController ..> javafx.stage.Modality
+com.mycompany.demoproj.ReserveRoomController ..> javafx.stage.Stage
+com.mycompany.demoproj.RevenueCalculator ..> java.sql.Connection
+com.mycompany.demoproj.RevenueCalculator ..> java.sql.DriverManager
+com.mycompany.demoproj.RevenueCalculator ..> java.sql.PreparedStatement
+com.mycompany.demoproj.RevenueCalculator ..> java.sql.ResultSet
+com.mycompany.demoproj.RevenueCalculator ..> java.sql.SQLException
+com.mycompany.demoproj.RevenueCalculator ..> java.time.LocalDate
+com.mycompany.demoproj.RevenueCalculator ..> java.time.format.DateTimeFormatter
+com.mycompany.demoproj.RevenueCalculator ..> javafx.util.Pair
+com.mycompany.demoproj.RevenueController ..> java.lang.Override
+com.mycompany.demoproj.RevenueController ..> javafx.fxml.FXML
+com.mycompany.demoproj.RevenueController ..> java.io.IOException
+com.mycompany.demoproj.RevenueController ..> java.net.URL
+com.mycompany.demoproj.RevenueController ..> java.time.LocalDate
+com.mycompany.demoproj.RevenueController ..> java.util.ResourceBundle
+com.mycompany.demoproj.RevenueController ..> javafx.event.ActionEvent
+com.mycompany.demoproj.RevenueController ..> javafx.scene.control.Button
+com.mycompany.demoproj.RevenueController ..> javafx.scene.control.Label
+com.mycompany.demoproj.RevenueController ..> javafx.stage.Stage
+com.mycompany.demoproj.RevenueController ..> javafx.util.Pair
+com.mycompany.demoproj.RevenueController --|> javafx.fxml.Initializable
+@enduml

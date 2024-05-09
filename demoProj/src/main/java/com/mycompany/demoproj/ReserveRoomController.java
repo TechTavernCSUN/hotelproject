@@ -1,24 +1,22 @@
 
 package com.mycompany.demoproj;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
-import java.io.IOException;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.io.IOException;
-import java.sql.SQLException;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class ReserveRoomController {
     @FXML
@@ -32,7 +30,7 @@ public class ReserveRoomController {
 
     @FXML
     private Spinner<Integer> daysSpinner;
-    
+
     @FXML
     private RadioButton cashRadioButton;
 
@@ -91,7 +89,7 @@ public class ReserveRoomController {
             System.out.println("Name and email fields are required.");
             return;
         }
-        
+
         // Get the selected payment option
         String paymentOption = cashRadioButton.isSelected() ? "Cash" : "Credit/Debit";
 
@@ -138,7 +136,7 @@ public class ReserveRoomController {
     private boolean reserveRoom(int roomNumber, String name, String email, int numberOfDays, String paymentOption) {
         String reservationsDbUrl = "jdbc:sqlite:reservations.db";
         String roomsDbUrl = "jdbc:sqlite:hotel_rooms.db";
-        
+
 
         try (Connection roomsConnection = DriverManager.getConnection(roomsDbUrl);
              Connection reservationsConnection = DriverManager.getConnection(reservationsDbUrl)) {
@@ -156,7 +154,7 @@ public class ReserveRoomController {
         }
         return false;
     }
-    
+
 }
 
 

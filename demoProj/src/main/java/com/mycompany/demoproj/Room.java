@@ -1,7 +1,14 @@
 
 package com.mycompany.demoproj;
 
-import javafx.beans.property.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Room {
     private final IntegerProperty roomId;
@@ -51,7 +58,7 @@ public class Room {
     public double getPricePerNight() {
         return pricePerNight.get();
     }
-    
+
     // New method to access availability status property
     public BooleanProperty availabilityStatusProperty() {
         return available;

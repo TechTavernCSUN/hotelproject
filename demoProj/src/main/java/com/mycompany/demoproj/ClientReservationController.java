@@ -1,18 +1,19 @@
 package com.mycompany.demoproj;
 
 import java.io.IOException;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class ClientReservationController implements Initializable {
@@ -25,7 +26,7 @@ public class ClientReservationController implements Initializable {
     @FXML private TableColumn<Reservation, String> checkOutColumn;
     @FXML private TableColumn<Reservation, Double> priceColumn;
     @FXML private TextField emailField;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
@@ -44,7 +45,7 @@ public class ClientReservationController implements Initializable {
             }
         });
     }
-    
+
     @FXML
     private void handleSearch() {
         String email = emailField.getText();
@@ -57,7 +58,7 @@ public class ClientReservationController implements Initializable {
         ObservableList<Reservation> reservations = FXCollections.observableArrayList();
         String url = "jdbc:sqlite:reservations.db";
         String query = "SELECT * FROM RESERVATIONS WHERE EMAIL LIKE '%" + email + "%'";
-        
+
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {

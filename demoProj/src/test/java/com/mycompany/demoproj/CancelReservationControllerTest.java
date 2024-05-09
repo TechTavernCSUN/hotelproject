@@ -3,34 +3,34 @@ package com.mycompany.demoproj;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import org.junit.jupiter.api.AfterEach;
+
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
  * @author ma782165
  */
 public class CancelReservationControllerTest {
-    
+
     public CancelReservationControllerTest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -63,7 +63,7 @@ public class CancelReservationControllerTest {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-    
+
     /**
      * Test of cancellation method, of class CancelReservationController.
      * uses success = true

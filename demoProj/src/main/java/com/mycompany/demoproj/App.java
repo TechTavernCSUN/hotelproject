@@ -1,12 +1,13 @@
 package com.mycompany.demoproj;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 
 /**
@@ -18,16 +19,25 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-//        scene = new Scene(loadFXML("primary"), 800, 600);
-//        stage.setScene(scene);
-//        stage.show();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Primary.fxml"));
-        Parent root = loader.load();
-        scene = new Scene(root, 800, 600);
-        PrimaryController primaryController = loader.getController();
-        scene.setUserData(primaryController);
-        stage.setScene(scene);
-        stage.show();
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/demoproj/primary.fxml"));
+            Parent root = loader.load();
+            scene = new Scene(root, 800, 600);
+            PrimaryController primaryController = loader.getController();
+            scene.setUserData(primaryController);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            // Print error message and stack trace
+            e.printStackTrace();
+            
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Failed to load FXML file");
+            alert.setContentText("An error occurred while loading the FXML file. Please check if the file exists and is accessible.");
+            alert.showAndWait();
+        }
     }
 
     static void setRoot(String fxml) throws IOException {

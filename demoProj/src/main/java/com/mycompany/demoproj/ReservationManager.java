@@ -1,14 +1,13 @@
 package com.mycompany.demoproj;
 
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Random;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class ReservationManager {

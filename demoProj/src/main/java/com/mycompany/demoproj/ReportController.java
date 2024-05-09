@@ -1,20 +1,20 @@
 package com.mycompany.demoproj;
 
 import java.io.IOException;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.collections.transformation.FilteredList;
 
 public class ReportController implements Initializable {
 
@@ -29,7 +29,7 @@ public class ReportController implements Initializable {
     @FXML private TableColumn<Reservation, Number> columnPrice;
     @FXML private TableColumn<Reservation, Number> columnTotal;
     @FXML private TextField searchField;
-    
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -44,7 +44,7 @@ public class ReportController implements Initializable {
         columnTotal.setCellValueFactory(cellData -> cellData.getValue().totalProperty());
 
         loadReservationData("");
-        
+
         // Add listener to search field to filter data based on client email
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             loadReservationData(newValue);
@@ -60,7 +60,7 @@ public class ReportController implements Initializable {
         if (searchFilter != null && !searchFilter.isEmpty()) {
             query += " WHERE EMAIL LIKE '%" + searchFilter + "%'";
         }
-        
+
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -86,7 +86,7 @@ public class ReportController implements Initializable {
 
     @FXML
     private void handleBack() throws IOException {
-        // Replace "App.setRoot("primary")" with your own method to change scenes or close the window
+        
         App.setRoot("primary");
         System.out.println("Back button pressed - implement scene change or window close.");
     }
