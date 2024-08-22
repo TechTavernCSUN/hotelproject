@@ -30,8 +30,8 @@ public class CancelReservationController implements Initializable {
     
     @FXML
     private void handleCancel() throws IOException {
-        String reservationsDbUrl = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\reservations.db";
-        String roomsDbUrl = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\hotel_rooms.db";
+        String reservationsDbUrl = "jdbc:sqlite:reservations.db";
+        String roomsDbUrl = "jdbc:sqlite:hotel_rooms.db";
         
         try (Connection roomsConnection = DriverManager.getConnection(roomsDbUrl);
              Connection reservationsConnection = DriverManager.getConnection(reservationsDbUrl)) {
@@ -43,12 +43,11 @@ public class CancelReservationController implements Initializable {
             boolean success = ReservationManager.cancelReservation(roomsConnection, reservationsConnection, roomNumber, email);
             
             // Display success or failure message
+            cancelation(success);
             if (success) {
-                System.out.println("Reservation cancelled successfully.");
                 // Return to the primary scene
                 App.setRoot("primary");
             } else {
-                System.out.println("Failed to cancel reservation.");
                 // Update error label
                 errorLabel.setText("Failed to cancel reservation.");
             }
@@ -59,10 +58,19 @@ public class CancelReservationController implements Initializable {
         
     }
     
+    public void cancelation(boolean success) throws IOException {
+           
+            // Display success or failure message
+            if (success) {
+                System.out.println("Reservation cancelled successfully.");
+            } else {
+                System.out.println("Failed to cancel reservation.");
+            }
+            
+    }
+    
     @FXML
     private void handleBack() throws IOException {
         App.setRoot("primary");
     }
-    
-    
 }

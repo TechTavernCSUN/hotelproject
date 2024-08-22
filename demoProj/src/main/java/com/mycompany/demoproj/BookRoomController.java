@@ -109,7 +109,7 @@ public class BookRoomController {
     
     private void loadRoomData() {
         ObservableList<Room> rooms = FXCollections.observableArrayList();
-        String url = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\hotel_rooms.db";
+        String url = "jdbc:sqlite:hotel_rooms.db";
         String query = "SELECT * FROM HOTEL_ROOMS";
 
         try (Connection conn = DriverManager.getConnection(url);
@@ -132,6 +132,7 @@ public class BookRoomController {
     
     @FXML
     private void handleBack() throws IOException {
+        System.out.println("Current working directory: " + System.getProperty("user.dir"));
         App.setRoot("primary");
     }
 

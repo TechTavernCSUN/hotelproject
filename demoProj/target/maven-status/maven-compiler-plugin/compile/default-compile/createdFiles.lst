@@ -3,7 +3,6 @@ com\mycompany\demoproj\Client.class
 com\mycompany\demoproj\App.class
 com\mycompany\demoproj\BookRoomController.class
 module-info.class
-com\mycompany\demoproj\DatabaseManager.class
 com\mycompany\demoproj\Reservation.class
 com\mycompany\demoproj\ConfirmationController.class
 com\mycompany\demoproj\RevenueController.class

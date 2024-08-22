@@ -136,8 +136,8 @@ public class ReserveRoomController {
     }
 
     private boolean reserveRoom(int roomNumber, String name, String email, int numberOfDays, String paymentOption) {
-        String reservationsDbUrl = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\reservations.db";
-        String roomsDbUrl = "jdbc:sqlite:C:\\Users\\ma782165\\Documents\\380\\Project\\hotelproject\\demoProj\\src\\main\\java\\com\\mycompany\\hotel_rooms.db";
+        String reservationsDbUrl = "jdbc:sqlite:reservations.db";
+        String roomsDbUrl = "jdbc:sqlite:hotel_rooms.db";
         
 
         try (Connection roomsConnection = DriverManager.getConnection(roomsDbUrl);
